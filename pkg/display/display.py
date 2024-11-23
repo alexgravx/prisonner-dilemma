@@ -1,6 +1,8 @@
 ## Code: © Alexandre Gravereaux 2023 ##
 
 import matplotlib.pyplot as plt
+import numpy as np
+from dilemma_pkg.arena import arene
 from dilemma_pkg.game import Joueurs
 
 def affichage(S, label, color):
@@ -17,6 +19,11 @@ def affichage_tournoi(P_it):
         affichage(P_it[i], L_label[i], cm(1.*i/NUM_COLORS))
     plt.legend(loc="upper left")
     plt.show()
+    
+if __name__ == '__main__':
+    L = arene(100, 100)
+    P_it = np.array(L)
+    affichage_tournoi(P_it.T)
 
 # Rq: c'est le donnant-donnant qui l'emporte usuellement
 # On peut appeler cette stratégie « Punition immédiate, mais pardon inconditionnel ». Pour les parents, un principe éducatif à méditer.
