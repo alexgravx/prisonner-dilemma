@@ -4,16 +4,21 @@ from dilemma_pkg.display import affichage_tournoi
 
 import numpy as np
 
-def matrice():
-    L = arene(100, 100)
-    P_it = np.array(L)
-    return convert(P_it.T)
+def players():
+    player_labels = [function.__name__ for function in Joueurs]
+    return player_labels
 
-def convert(matrice: np.ndarray):
-    Populations_lists = [i.tolist() for i in matrice]
-    Populations_label = [function.__name__ for function in Joueurs]
-    Populations_dict = {label: pop_list for label in Populations_label for pop_list in Populations_lists}
-    return Populations_dict
+def main():
+    result = []
+    Pop_list = arene(10, 10)
+    Player_list = players()
+    for index, population_turn in enumerate(Pop_list):
+        turn_dict = {}
+        turn_dict["turn"] = index
+        for player_index, player_label in enumerate(Player_list):
+            turn_dict[player_label] = population_turn[player_index]
+        result.append(turn_dict)
+    return result
 
 if __name__ == '__main__':
     L = arene(100, 100)
