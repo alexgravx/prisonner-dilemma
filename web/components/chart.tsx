@@ -28,7 +28,9 @@ async function getPlayers() {
   return getData("http://localhost:8000/players")
 }
 
-export async function Example() {
+var colors = ["#111111", "#356000", "#148f77", "#d35400", "#1b4f72", "#85c1e9", "#f4d03f", "#283747", "#d98880", "#148f77", "#e74c3c", "#f2f3f4"]
+
+export async function ResultLineChart() {
   let chart_data = await getChartData()
   let players = await getPlayers()
   return (
@@ -54,6 +56,7 @@ export async function Example() {
           type="monotone"
           key={index}
           dataKey={player}
+          stroke={colors[index]}
           strokeWidth={2}
           dot={false}
         />)

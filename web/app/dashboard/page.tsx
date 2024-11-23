@@ -2,7 +2,7 @@
 import * as React from "react";
 import {NextUIProvider} from "@nextui-org/react";
 import {Slider} from "@nextui-org/react";
-import {Example} from "@/components/chart"
+import {ResultLineChart} from "@/components/chart"
 
 export default function Home() {
   return (
@@ -49,7 +49,7 @@ export default function Home() {
         <h1 className="mt-10">
           Arena Results
         </h1>
-        <Example></Example>
+        <ResultLineChart></ResultLineChart>
       </div>
     </NextUIProvider>
   )
