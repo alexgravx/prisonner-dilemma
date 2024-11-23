@@ -2,7 +2,7 @@
 import * as React from "react";
 import {NextUIProvider} from "@nextui-org/react";
 import {Slider} from "@nextui-org/react";
-import Example from "@/components/chart"
+import {Example} from "@/components/chart"
 
 export default function Home() {
   return (
