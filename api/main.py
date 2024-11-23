@@ -28,8 +28,8 @@ def hello_world():
     return {"Hello": "World"}
 
 @app.get("/arena")
-def get_arena() -> list[Strategy]:
-    arena_turns = main.main()
+def get_arena(turns: int = 100, pop: int = 100) -> list[Strategy]:
+    arena_turns = main.main(turns, pop)
     arena_result = [Strategy(root=turn) for turn in arena_turns]
     return arena_result
 
