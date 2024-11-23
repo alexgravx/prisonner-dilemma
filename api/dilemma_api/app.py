@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from pydantic import BaseModel, RootModel
+from pydantic import RootModel
 from dilemma_pkg import main
 
 from fastapi.middleware.cors import CORSMiddleware

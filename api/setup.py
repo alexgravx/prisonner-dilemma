@@ -3,6 +3,7 @@ from setuptools import setup, find_packages
 requirements = """
 pip>=24.3.1
 fastapi>=0.115.5
+hypercorn==0.14.4
 """
 
 setup(
@@ -14,7 +15,7 @@ setup(
         description="An api to simulate prisonner dilemma iterations, with multiple strategies",
         packages=find_packages(),
         readme = "README.md",
-        install_requires = ["numpy >= 2.1.3"],
+        install_requires = requirements,
         python_requires=">=3.10.12",
         classifiers=[
         "Programming Language :: Python :: 3.10",
