@@ -1,10 +1,13 @@
 "use client";
-import * as React from "react";
-import {NextUIProvider} from "@nextui-org/react";
+import React from "react";
+import {NextUIProvider, SliderValue} from "@nextui-org/react";
 import {Slider} from "@nextui-org/react";
 import {ResultLineChart} from "@/components/chart"
 
 export default function Home() {
+  const [turns, setTurns] = React.useState<SliderValue>(100);
+  const [pop, setPop] = React.useState<SliderValue>(100);
+
   return (
     <NextUIProvider>
       <div className="prose dark:prose-invert min-w-[55rem]">
@@ -38,18 +41,22 @@ export default function Home() {
         </h1>
         <div className="flex flex-row justify-around">
             <Slider size="lg" step={1} color="primary" label="Population"
-            showSteps={false} maxValue={500} minValue={20} defaultValue={100}
-            className="max-w-sm" 
+            showSteps={false} maxValue={500} minValue={20} value={pop}
+            onChange={setPop} className="max-w-sm"
             />
             <Slider size="lg" step={1} color="primary" label="Nb of rounds"
-            showSteps={false} maxValue={500} minValue={20} defaultValue={100}
-            className="max-w-sm" 
+            showSteps={false} maxValue={500} minValue={20} value={turns}
+            onChange={setTurns} className="max-w-sm"
             />
+        </div>
+        <div>
+          {turns}
+          {pop}
         </div>
         <h1 className="mt-10">
           Arena Results
         </h1>
-        <ResultLineChart></ResultLineChart>
+        <ResultLineChart turns={Number(turns)} pop={Number(pop)} />
       </div>
     </NextUIProvider>
   )

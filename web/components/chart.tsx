@@ -1,12 +1,7 @@
-import React, { PureComponent } from 'react';
+import React, { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-type Strategy = {
-  strategy_label: string;
-  population: number[];
-};
-
-async function getData(url:string) {
+async function getData(url:URL) {
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -20,25 +15,36 @@ async function getData(url:string) {
   }
 }
 
-async function getChartData() {
-  return getData("http://localhost:8000/arena")
-}
+var colors = ["#111111", "#356000", "#148f77", "#d35400", "#1b4f72", "#85c1e9", "#f4d03f", "#283747", "#d98880", "#148f77", "#e74c3c", "#d2b4de"]
 
-async function getPlayers() {
-  return getData("http://localhost:8000/players")
-}
+export function ResultLineChart({ turns, pop }: { turns: number; pop: number }) {
+  const [chartData, setChartData] = useState([]);
+  const [players, setPlayers] = useState<string[]>([]);
 
-var colors = ["#111111", "#356000", "#148f77", "#d35400", "#1b4f72", "#85c1e9", "#f4d03f", "#283747", "#d98880", "#148f77", "#e74c3c", "#f2f3f4"]
+  useEffect(() => {
+    async function getChartData(turns:number=100, pop:number=100) {
+      const full_url = new URL("http://localhost:8000/arena");
+      turns && full_url.searchParams.set('turns', turns.toString())
+      pop && full_url.searchParams.set('pop', pop.toString())
+      let data = await getData(full_url)
+      setChartData(data);
+    }
 
-export async function ResultLineChart() {
-  let chart_data = await getChartData()
-  let players = await getPlayers()
+    async function getPlayers() {
+      const full_url = new URL("http://localhost:8000/players");
+      let players = await getData(full_url)
+      setPlayers(players);
+    }
+    getChartData(turns, pop);
+    getPlayers();
+  }, [turns, pop]);
+
   return (
     <ResponsiveContainer width="100%" height="100%" className="min-h-[40rem]">
       <LineChart
         width={500}
         height={800}
-        data={chart_data}
+        data={chartData}
         margin={{
           top: 5,
           right: 30,
