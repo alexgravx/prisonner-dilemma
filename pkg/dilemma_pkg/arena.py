@@ -2,7 +2,7 @@
 
 from dilemma_pkg.game import Joueurs, matrice_profils
 
-N = 100 # Iteration number. No more than 1000 needed
+N_iterations = 100 # Iteration number. No more than 1000 needed
 
 # On part d'une population de N entités, un tournoi entre ces dernières et fait. A chaque tour, toute la population est redistribuée proportionnellement selon les scores.
 
@@ -31,6 +31,6 @@ def arene_combat(tours, N_entites, M_result):
     return P_it
 
 def arene(tours, N_entites, T, C, P, D):
-    M_result = matrice_profils(N, T, C, P, D)
-    arene_combat(tours, N_entites, M_result)
+    M_result = matrice_profils(N_iterations, T, C, P, D)
+    return arene_combat(tours, N_entites, M_result)
     
