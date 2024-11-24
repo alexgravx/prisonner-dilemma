@@ -1,11 +1,12 @@
 ## Code: © Alexandre Gravereaux 2023 ##
 
-from dilemma_pkg.game import Joueurs
-from dilemma_pkg.game import M_result
+from dilemma_pkg.game import Joueurs, matrice_profils
+
+N = 100 # Iteration number. No more than 1000 needed
 
 # On part d'une population de N entités, un tournoi entre ces dernières et fait. A chaque tour, toute la population est redistribuée proportionnellement selon les scores.
 
-def arene(tours, N_entites):
+def arene_combat(tours, N_entites, M_result):
     # Matrice des populations
     P = [N_entites for i in range(len(Joueurs))]
     # Matrice de l'évolution des populations
@@ -28,3 +29,8 @@ def arene(tours, N_entites):
         P = [(S[i]/score_tot)*pop_tot for i in range(len(Joueurs))]
         P_it.append(P[:])
     return P_it
+
+def arene(tours, N_entites, T, C, P, D):
+    M_result = matrice_profils(N, T, C, P, D)
+    arene_combat(tours, N_entites, M_result)
+    

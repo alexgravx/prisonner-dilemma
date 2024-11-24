@@ -5,9 +5,9 @@ def players():
     player_labels = [function.__name__ for function in Joueurs]
     return player_labels
 
-def main(nb_turns=100, pop_init=100):
+def main(nb_turns=100, pop_init=100, T=5, C=3, P=1, D=0):
     result = []
-    Pop_list = arene(nb_turns, pop_init)
+    Pop_list = arene(nb_turns, pop_init, T, C, P, D)
     Player_list = players()
     for index, population_turn in enumerate(Pop_list):
         turn_dict = {}
