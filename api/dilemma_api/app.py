@@ -35,5 +35,5 @@ def get_arena(turns: int = 100, pop: int = 100, T: int = 5, C: int = 3, P: int =
 
 @app.get("/players")
 def get_players() -> list[str]:
-    arena_players = main.players()
-    return arena_players
+    # arena_players = main.players()
+    return ['Donnant_Donnant', 'Mechant']

@@ -15,6 +15,20 @@ from dilemma_pkg.strategies import (
     Rancunière
 )
 
+# Players list
+
+Joueurs = [Donnant_Donnant,
+           MajoMou, Sondeur,
+           Periodique_cct,
+           Donnant_Donnant_dur,
+           Gentille,
+           Lunatique,
+           Mefiant,
+           Mechant,
+           MajoDur,
+           Periodique_ttc,
+           Rancunière]
+
 def result(x, y, M):
     return M[f'{x}/{y}']
 
@@ -37,20 +51,6 @@ def jeu(joueur1, joueur2, N, M):
         S_b.append(s_b)
         i += 1
     return (s_a, s_b)
-        
-# Players list
-
-Joueurs = [Donnant_Donnant,
-           MajoMou, Sondeur,
-           Periodique_cct,
-           Donnant_Donnant_dur,
-           Gentille,
-           Lunatique,
-           Mefiant,
-           Mechant,
-           MajoDur,
-           Periodique_ttc,
-           Rancunière]
 
 # Matrix filling
 
@@ -61,8 +61,8 @@ def remplissage(Joueurs, N, M):
             M_result[j1][j2] = jeu(Joueurs[j1],Joueurs[j2], N, M)[0]
     return M_result
 
-def matrice_profils(N, T, C, P, D):
+def matrice_profils(N, selected_players, T, C, P, D):
     M = payment_matrix(T, C, P, D)
-    M_result = remplissage(Joueurs, N, M)
+    M_result = remplissage(selected_players, N, M)
     return M_result
     
