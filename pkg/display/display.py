@@ -21,7 +21,7 @@ def affichage_tournoi(P_it):
     plt.show()
     
 if __name__ == '__main__':
-    L = arene(100, 100)
+    L = arene(100, 100, 5, 3, 1, 0)
     P_it = np.array(L)
     affichage_tournoi(P_it.T)
 

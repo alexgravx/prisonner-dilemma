@@ -27,8 +27,8 @@ export function ResultLineChart({ turns, pop, T, C, P, D }: { turns: number; pop
       turns && full_url.searchParams.set('turns', turns.toString())
       pop && full_url.searchParams.set('pop', pop.toString())
       T && full_url.searchParams.set('T', T.toString())
-      C && full_url.searchParams.set('P', C.toString())
-      P && full_url.searchParams.set('C', P.toString())
+      C && full_url.searchParams.set('P', P.toString())
+      P && full_url.searchParams.set('C', C.toString())
       D && full_url.searchParams.set('D', D.toString())
       let data = await getData(full_url)
       setChartData(data);
