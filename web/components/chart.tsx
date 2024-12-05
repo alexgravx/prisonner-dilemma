@@ -1,9 +1,26 @@
+import { data } from 'autoprefixer';
 import React, { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-async function getData(url:URL) {
+type DataInput = {
+    turns: number,
+    pop: number,
+    T: number,
+    P: number,
+    C: number,
+    D: number,
+    player_list: string[]
+  }
+
+async function getData(url:URL, data_input:DataInput) {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data_input),
+    });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
@@ -37,18 +54,20 @@ export function ResultLineChart(
       C:number,
       P:number,
       D:number,
-      players: string[]
+      player_list: string[]
     ) {
-      const full_url = new URL("http://localhost:8000/arena");
-      turns && full_url.searchParams.set('turns', turns.toString())
-      pop && full_url.searchParams.set('pop', pop.toString())
-      T && full_url.searchParams.set('T', T.toString())
-      C && full_url.searchParams.set('P', P.toString())
-      P && full_url.searchParams.set('C', C.toString())
-      D && full_url.searchParams.set('D', D.toString())
-      players && full_url.searchParams.set('player_list', players.toString())
-      let data = await getData(full_url)
-      setChartData(data);
+      const url = new URL("http://localhost:8000/arena");
+      let data_input = {
+        turns: turns,
+        pop: pop,
+        T: T,
+        P: P,
+        C: C,
+        D: D,
+        player_list: player_list
+      }
+      let data_output = await getData(url, data_input)
+      setChartData(data_output);
     }
     getChartData(turns, pop, T, C, P, D, players);
   }, [turns, pop, T, C, P, D, players]);

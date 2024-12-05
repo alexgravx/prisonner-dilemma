@@ -1,5 +1,5 @@
-from fastapi import FastAPI
-from pydantic import RootModel
+from fastapi import FastAPI, Query
+from pydantic import RootModel, BaseModel
 from dilemma_pkg import main
 
 from fastapi.middleware.cors import CORSMiddleware
@@ -23,22 +23,18 @@ app.add_middleware(
 class Strategy(RootModel[dict[str, float]]):
     root: dict[str, float | int]
 
-@app.get("/arena")
-def get_arena(
+class DataInput(BaseModel):
     turns: int = 100,
     pop: int = 100,
     T: int = 5,
     C: int = 3,
     P: int = 1,
     D: int = 0,
-    player_list: list[str] = ['Donnant_Donnant', 'Mechant']
-) -> list[Strategy]:
-    print(player_list)
-    arena_turns = main.main(turns, pop, T, C, P, D, player_list)
+    player_list: list[str] | None = Query(default=None)
+
+@app.post("/arena")
+def get_arena(data: DataInput) -> list[Strategy]:
+    print(data)
+    arena_turns = main.main(data.turns, data.pop, data.T, data.C, data.P, data.D, data.player_list)
     arena_result = [Strategy(root=turn) for turn in arena_turns]
     return arena_result
-
-@app.get("/players")
-def get_players() -> list[str]:
-    # arena_players = main.players()
-    return ['Donnant_Donnant', 'Mechant']
