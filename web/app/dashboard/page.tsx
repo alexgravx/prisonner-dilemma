@@ -72,7 +72,7 @@ export default function Home() {
               value="Donnant_Donannt"
               user={{
                 name: "Donnant Donnant",
-                avatar: "https://avatars.githubusercontent.com/u/30373425?v=4",
+                avatar: "https://openmoji.org/data/color/svg/1F600.svg",
                 role: "I cooperate on the first turn, then I play what my opponent has played the previous turn",
               }}
             />
@@ -80,7 +80,7 @@ export default function Home() {
               value="MajoMou"
               user={{
                 name: "Majo mou",
-                avatar: "https://i.pravatar.cc/300?u=a042581f4e29026707d",
+                avatar: "https://openmoji.org/data/color/svg/1FAE0.svg",
                 role: "I play what my opponent has mostly played, at first run or in case of a tie I cooperate",
               }}
             />
@@ -88,7 +88,7 @@ export default function Home() {
               value="Sondeur"
               user={{
                 name: "Sondeur",
-                avatar: "https://i.pravatar.cc/300?u=a042581f4e29026704d",
+                avatar: "https://openmoji.org/data/color/svg/1F928.svg",
                 role: "On the first 3 moves, I play tcc; From move 4, if my opponent cooperate on moves 2 and 3 -> I always betray. Else, I play Donnant-donnant",
               }}
             />
@@ -96,7 +96,7 @@ export default function Home() {
               value="Periodique_cct"
               user={{
                 name: "Periodique cct",
-                avatar: "https://i.pravatar.cc/300?u=a048581f4e29026701d",
+                avatar: "https://openmoji.org/data/color/svg/1FAE8.svg",
                 role: "Periodic player. Follows always the same order: Cooperate - Cooperate - Betray",
               }}
             />
