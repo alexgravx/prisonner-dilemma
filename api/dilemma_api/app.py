@@ -23,13 +23,18 @@ app.add_middleware(
 class Strategy(RootModel[dict[str, float]]):
     root: dict[str, float | int]
 
-@app.get("/")
-def hello_world():
-    return {"Hello": "World"}
-
 @app.get("/arena")
-def get_arena(turns: int = 100, pop: int = 100, T: int = 5, C: int = 3, P: int = 1, D: int = 0) -> list[Strategy]:
-    arena_turns = main.main(turns, pop, T, C, P, D)
+def get_arena(
+    turns: int = 100,
+    pop: int = 100,
+    T: int = 5,
+    C: int = 3,
+    P: int = 1,
+    D: int = 0,
+    player_list: list[str] = ['Donnant_Donnant', 'Mechant']
+) -> list[Strategy]:
+    print(player_list)
+    arena_turns = main.main(turns, pop, T, C, P, D, player_list)
     arena_result = [Strategy(root=turn) for turn in arena_turns]
     return arena_result
 

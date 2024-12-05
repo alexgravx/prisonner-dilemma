@@ -7,7 +7,7 @@ import {ResultLineChart} from "@/components/chart"
 import {CustomCheckbox} from "@/components/custom_checkbox";
 
 export default function Home() {
-  const [groupSelected, setGroupSelected] = React.useState<string[]>([]);
+  const [playersSelected, setPlayersSelected] = React.useState<string[]>(['Donnant_Donnant', 'MajoMou']);
   const [turns, setTurns] = React.useState<SliderValue>(100);
   const [pop, setPop] = React.useState<SliderValue>(100);
   const [T, setT] = React.useState<SliderValue>(5);
@@ -62,14 +62,14 @@ export default function Home() {
         <div className="flex flex-col gap-1 w-full">
           <CheckboxGroup
             label="Select employees"
-            value={groupSelected}
-            onChange={setGroupSelected}
+            value={playersSelected}
+            onChange={setPlayersSelected}
             classNames={{
               base: "w-full"
             }}
           >
             <CustomCheckbox
-              value="Donnant_Donannt"
+              value="Donnant_Donnant"
               user={{
                 name: "Donnant Donnant",
                 avatar: "https://openmoji.org/data/color/svg/1F600.svg",
@@ -102,7 +102,7 @@ export default function Home() {
             />
           </CheckboxGroup>
           <p className="mt-4 ml-1 text-default-500">
-            Selected: {groupSelected.join(", ")}
+            Selected: {playersSelected.join(", ")}
           </p>
         </div>
         <h1 className="mt-10">
@@ -115,6 +115,7 @@ export default function Home() {
           C={Number(C)}
           P={Number(P)}
           D={Number(D)}
+          players={playersSelected}
         />
       </div>
     </NextUIProvider>
