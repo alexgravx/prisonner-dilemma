@@ -1,9 +1,8 @@
-import Link from "next/link"
 import "./globals.css"
 import { Inter } from "next/font/google"
-import { ThemeProvider } from "@/components/theme-provider"
 import { Analytics } from "@/components/analytics"
-import { ModeToggle } from "@/components/mode-toggle"
+import Provider from "./provider"
+import Header from "./header"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -20,24 +19,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body
-        className={`antialiased min-h-screen bg-white dark:bg-black text-slate-900 dark:text-slate-50 ${inter.className}`}
-      >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="">
-            <header>
-              <div className="flex items-center justify-between">
-                <ModeToggle />
-                <nav className="ml-auto text-sm font-medium space-x-6">
-                  <Link href="/">Home</Link>
-                  <Link href="/dashboard">Game</Link>
-                  <Link href="https://en.wikipedia.org/wiki/Prisoner%27s_dilemma">About</Link>
-                </nav>
-              </div>
-            </header>
-            <main className="flex items-center justify-center">{children}</main>
-          </div>
-          <Analytics />
-        </ThemeProvider>
+        className={`
+          antialiased min-h-screen
+          bg-white dark:bg-black
+          text-slate-900 dark:text-slate-50
+          ${inter.className}`}>
+        <Provider>
+          <Header />
+          <main className="flex items-center justify-center">{children}</main>
+        </Provider>
+        <Analytics />
       </body>
     </html>
   )

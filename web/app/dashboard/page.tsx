@@ -1,10 +1,11 @@
 "use client";
+
 import React from "react";
-import {NextUIProvider, SliderValue} from "@nextui-org/react";
-import {CheckboxGroup} from "@nextui-org/react";
-import {Slider} from "@nextui-org/react";
+import {SliderValue} from "@nextui-org/react";
 import {ResultLineChart} from "@/components/chart"
-import {CustomCheckbox} from "@/components/custom_checkbox";
+
+import Parameters from "./parameters"
+import Players from "./players";
 
 export default function Home() {
   const [playersSelected, setPlayersSelected] = React.useState<string[]>(['Donnant_Donnant', 'MajoMou']);
@@ -16,108 +17,29 @@ export default function Home() {
   const [D, setD] = React.useState<SliderValue>(0);
 
   return (
-    <NextUIProvider>
-      <div className="prose dark:prose-invert min-w-[55rem]">
-        <h1 className="mt-10">
-          Dilemma game Parameters
-        </h1>
-        <div className="flex flex-row justify-around">
-          <div className="flex flex-col w-80">
-            <Slider size="lg" step={1} color="primary" label="Tentation"
-            showSteps={true} maxValue={7} minValue={0} value={T}
-            onChange={setT} className="max-w-md"
-            />
-            <Slider size="lg" step={1} color="primary" label="Cooperation"
-            showSteps={true} maxValue={7} minValue={0} value={C}
-            onChange={setC} className="max-w-md"
-            />
-          </div>
-          <div className="flex flex-col w-80">
-            <Slider size="lg" step={1} color="primary" label="Punishment"
-            showSteps={true} maxValue={7} minValue={0} value={P}
-            onChange={setP} className="max-w-md"
-            />
-            <Slider size="lg" step={1} color="primary" label="Duperie"
-            showSteps={true} maxValue={7} minValue={0} value={D}
-            onChange={setD} className="max-w-md"
-            />
-          </div>
-        </div>
-        <h1 className="mt-10">
-          Arena Parameters
-        </h1>
-        <div className="flex flex-row justify-around">
-            <Slider size="lg" step={1} color="primary" label="Population"
-            showSteps={false} maxValue={300} minValue={20} value={pop}
-            onChange={setPop} className="max-w-sm"
-            />
-            <Slider size="lg" step={1} color="primary" label="Nb of rounds"
-            showSteps={false} maxValue={300} minValue={20} value={turns}
-            onChange={setTurns} className="max-w-sm"
-            />
-        </div>
-        <h1 className="mt-10">
-          Arena Players
-        </h1>
-        <div className="flex flex-col gap-1 w-full">
-          <CheckboxGroup
-            label="Select employees"
-            value={playersSelected}
-            onChange={setPlayersSelected}
-            classNames={{
-              base: "w-full"
-            }}
-          >
-            <CustomCheckbox
-              value="Donnant_Donnant"
-              user={{
-                name: "Donnant Donnant",
-                avatar: "https://openmoji.org/data/color/svg/1F600.svg",
-                role: "I cooperate on the first turn, then I play what my opponent has played the previous turn",
-              }}
-            />
-            <CustomCheckbox
-              value="MajoMou"
-              user={{
-                name: "Majo mou",
-                avatar: "https://openmoji.org/data/color/svg/1FAE0.svg",
-                role: "I play what my opponent has mostly played, at first run or in case of a tie I cooperate",
-              }}
-            />
-            <CustomCheckbox
-              value="Sondeur"
-              user={{
-                name: "Sondeur",
-                avatar: "https://openmoji.org/data/color/svg/1F928.svg",
-                role: "On the first 3 moves, I play tcc; From move 4, if my opponent cooperate on moves 2 and 3 -> I always betray. Else, I play Donnant-donnant",
-              }}
-            />
-            <CustomCheckbox
-              value="Periodique_cct"
-              user={{
-                name: "Periodique cct",
-                avatar: "https://openmoji.org/data/color/svg/1FAE8.svg",
-                role: "Periodic player. Follows always the same order: Cooperate - Cooperate - Betray",
-              }}
-            />
-          </CheckboxGroup>
-          <p className="mt-4 ml-1 text-default-500">
-            Selected: {playersSelected.join(", ")}
-          </p>
-        </div>
-        <h1 className="mt-10">
-          Arena Results
-        </h1>
-        <ResultLineChart
-          turns={Number(turns)}
-          pop={Number(pop)}
-          T={Number(T)}
-          C={Number(C)}
-          P={Number(P)}
-          D={Number(D)}
-          players={playersSelected}
-        />
-      </div>
-    </NextUIProvider>
+    <div className="prose dark:prose-invert min-w-[55rem]">
+      <Parameters 
+        turns={turns} setTurns={setTurns}
+        pop={pop} setPop={setPop}
+        T={T} setT={setT} C={C} setC={setC}
+        P={P} setP={setP} D={D} setD={setD}
+      />
+      <Players
+        playersSelected={playersSelected}
+        setPlayersSelected={setPlayersSelected}
+      />
+      <h1 className="mt-10">
+        Arena Results
+      </h1>
+      <ResultLineChart
+        turns={Number(turns)}
+        pop={Number(pop)}
+        T={Number(T)}
+        C={Number(C)}
+        P={Number(P)}
+        D={Number(D)}
+        players={playersSelected}
+      />
+    </div>
   )
 }
