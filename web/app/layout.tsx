@@ -25,7 +25,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
           text-slate-900 dark:text-slate-50
           ${inter.className}`}>
         <Provider>
-          <Header />
           <main className="flex items-center justify-center">{children}</main>
         </Provider>
         <Analytics />
