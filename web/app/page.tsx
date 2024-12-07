@@ -3,24 +3,24 @@
 import Link from "next/link"
 import {Button} from "@nextui-org/react";
 import { ModeToggle } from "@/components/mode-toggle"
-import {HeroHighlightDemo} from "@/components/dashboard_test"
+import {HeroHighlightDemo} from "@/components/welcome-background"
 import { Highlight } from "@/components/ui/hero-highlight";
-import Image from 'next/image'
+import { BackgroundGradientDemo } from "@/components/light-box";
 
 export default function Provider() {
   return (
     <HeroHighlightDemo>
-      <div className="flex flex-row justify-between items-center">
+      <div className="flex md:flex-col lg:flex-row justify-between items-center w-[80vw]">
         <div className="flex flex-col justify-center items-baseline min-w-[40vw]">
           <div>
           {"Prisoner's Dilemma."}
           </div>
           <Highlight className="text-black dark:text-white">
-            betray
+            Betray
           </Highlight>
           {" or "}
           <Highlight className="text-black dark:text-white">
-            cooperate ?
+            Cooperate ?
           </Highlight>
           <div className="flex justify-center items-center mt-10">
             <div className={"mx-8"}>
@@ -33,12 +33,7 @@ export default function Provider() {
             </Link>
           </div>
         </div>
-        <Image
-          src="/PrisonnerSimulation.jpg"
-          width={400}
-          height={400}
-          alt="Picture of the author"
-          />
+        <BackgroundGradientDemo />
       </div>
     </HeroHighlightDemo>
   )
