@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { HeroHighlight, Highlight } from "@/components/ui/hero-highlight";
+import { HeroHighlight } from "@/components/ui/hero-highlight";
 
 interface Props {
     children: React.ReactNode;
@@ -24,17 +24,8 @@ export const HeroHighlightDemo: React.FC<Props> = ({ children }) => {
         }}
         className="text-2xl px-4 md:text-4xl lg:text-5xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto "
       >
-        {"Prisoner's Dilemma.\n Will you "}
-        <Highlight className="text-black dark:text-white">
-          betray
-        </Highlight>
-        {" or "}
-        <Highlight className="text-black dark:text-white">
-          cooperate
-        </Highlight>
-        {" ?"}
+        {children}
       </motion.h1>
-      {children}
     </HeroHighlight>
   );
 }
