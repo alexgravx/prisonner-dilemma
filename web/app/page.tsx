@@ -6,6 +6,7 @@ import { ModeToggle } from "@/components/mode-toggle"
 import {HeroHighlightDemo} from "@/components/welcome-background"
 import { Highlight } from "@/components/ui/hero-highlight";
 import { BackgroundGradientDemo } from "@/components/light-box";
+import { HoverBorderGradientDemo } from "@/components/custom-button"
 
 export default function Provider() {
   return (
@@ -27,9 +28,7 @@ export default function Provider() {
               <ModeToggle />
             </div>
             <Link href="/dashboard">
-              <Button color="primary" variant="ghost">
-                Start the game !
-              </Button>  
+              <HoverBorderGradientDemo />
             </Link>
           </div>
         </div>

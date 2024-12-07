@@ -2,7 +2,7 @@
 
 import React from "react";
 import {SliderValue} from "@nextui-org/react";
-import {ResultLineChart} from "@/components/chart"
+import {ResultLineChart} from "@/components/custom-chart"
 
 import Parameters from "./parameters"
 import Players from "./players";
