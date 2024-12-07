@@ -1,6 +1,6 @@
 "use client"
 
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/components/other/theme-provider"
 import {NextUIProvider} from "@nextui-org/react";
 
 export interface ProvidersProps {

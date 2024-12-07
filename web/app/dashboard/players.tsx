@@ -2,7 +2,7 @@
 
 import React from "react";
 import {CheckboxGroup} from "@nextui-org/react";
-import {CustomCheckbox} from "@/components/custom_checkbox";
+import {CustomCheckbox} from "@/components/custom-checkbox";
 
 type Players = {
   playersSelected: string[],
