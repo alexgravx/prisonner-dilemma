@@ -34,7 +34,7 @@ export default function Players({playersSelected, setPlayersSelected}: Players) 
         value="Sondeur"
         user={{
           name: "Sondeur",
-          avatar: "https://openmoji.org/data/color/svg/1F928.svg",
+          avatar: "https://openmoji.org/data/color/svg/1F914.svg",
         }}
       />
       <CustomCheckbox
@@ -42,6 +42,62 @@ export default function Players({playersSelected, setPlayersSelected}: Players) 
         user={{
           name: "Periodique cct",
           avatar: "https://openmoji.org/data/color/svg/1FAE8.svg",
+        }}
+      />
+      <CustomCheckbox
+        value="Donnant_Donnant_dur"
+        user={{
+          name: "Donnant Donnant dur",
+          avatar: "https://openmoji.org/data/color/svg/1FAE1.svg",
+        }}
+      />
+      <CustomCheckbox
+        value="Gentille"
+        user={{
+          name: "Gentille",
+          avatar: "https://openmoji.org/data/color/svg/1F917.svg",
+        }}
+      />
+      <CustomCheckbox
+        value="Lunatique"
+        user={{
+          name: "Lunatique",
+          avatar: "https://openmoji.org/data/color/svg/1F635-200D-1F4AB.svg",
+        }}
+      />
+      <CustomCheckbox
+        value="Mefiant"
+        user={{
+          name: "Mefiant",
+          avatar: "https://openmoji.org/data/color/svg/1F928.svg",
+        }}
+      />
+      <CustomCheckbox
+        value="Mechant"
+        user={{
+          name: "Mechant",
+          avatar: "https://openmoji.org/data/color/svg/1F620.svg",
+        }}
+      />
+      <CustomCheckbox
+        value="MajoDur"
+        user={{
+          name: "Majo dur",
+          avatar: "https://openmoji.org/data/color/svg/1F978.svg",
+        }}
+      />
+      <CustomCheckbox
+        value="Periodique_ttc"
+        user={{
+          name: "Periodique ttc",
+          avatar: "https://openmoji.org/data/color/svg/1F974.svg",
+        }}
+      />
+      <CustomCheckbox
+        value="Rancunière"
+        user={{
+          name: "Rancuniere",
+          avatar: "https://openmoji.org/data/color/svg/1F62E-200D-1F4A8.svg",
         }}
       />
     </CheckboxGroup>

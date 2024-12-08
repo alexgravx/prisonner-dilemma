@@ -6,10 +6,10 @@ import { ArenaChart } from "@/components/custom-chart"
 
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid"
 import {
-  IconClipboardCopy,
-  IconFileBroken,
-  IconSignature,
-  IconTableColumn,
+  IconBrain,
+  IconBrandAmongUs,
+  IconChartAreaLine,
+  IconChartCandle,
 } from "@tabler/icons-react";
 
 import GameParameters from "./game-parameters"
@@ -24,7 +24,7 @@ type Bento = {
   icon?: React.ReactNode;
 }
 
-function BentoGridSecondDemo({ items } : { items: Bento[] }) {
+function FullBentoGrid({ items } : { items: Bento[] }) {
   return (
     <BentoGrid className="max-w-[80rem] mx-auto md:auto-rows-min">
       {items.map((item, i) => (
@@ -60,7 +60,7 @@ export default function Home() {
         P={P} setP={setP} D={D} setD={setD}
         />,
       className: "md:col-span-2",
-      icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
+      icon: <IconBrain className="h-4 w-4 text-neutral-500" />,
     },
     {
       title: "Arena Parameters",
@@ -71,7 +71,7 @@ export default function Home() {
           pop={pop} setPop={setPop}
         />,
       className: "md:col-span-1",
-      icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
+      icon: <IconChartCandle className="h-4 w-4 text-neutral-500" />,
     },
     {
       title: "Player Selection",
@@ -82,7 +82,7 @@ export default function Home() {
         setPlayersSelected={setPlayersSelected}
         />,
       className: "md:col-span-3",
-      icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+      icon: <IconBrandAmongUs className="h-4 w-4 text-neutral-500" />,
     },
     {
       title: "Arena Results",
@@ -98,16 +98,13 @@ export default function Home() {
         players={playersSelected}
         />,
       className: "md:col-span-3",
-      icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
+      icon: <IconChartAreaLine className="h-4 w-4 text-neutral-500" />,
     },
   ];
 
   return (
     <div className="prose dark:prose-invert min-w-[80rem] mt-20">
-      <BentoGridSecondDemo items={items} />
-      <p className="mt-4 ml-1 text-default-500">
-        Selected: {playersSelected.join(", ")}
-      </p>
+      <FullBentoGrid items={items} />
     </div>
   )
 }
