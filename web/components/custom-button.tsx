@@ -2,7 +2,7 @@
 import React from "react";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
  
-export function HoverBorderGradientDemo() {
+export function HoverButton() {
   return (
     <div className="flex justify-center text-center">
       <HoverBorderGradient

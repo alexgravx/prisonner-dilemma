@@ -1,4 +1,3 @@
-import { data } from 'autoprefixer';
 import React, { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
@@ -34,7 +33,7 @@ async function getData(url:URL, data_input:DataInput) {
 
 var colors = ["#111111", "#356000", "#148f77", "#d35400", "#1b4f72", "#85c1e9", "#f4d03f", "#283747", "#d98880", "#148f77", "#e74c3c", "#d2b4de"]
 
-export function ResultLineChart(
+export function ArenaChart(
   { turns, pop, T, C, P, D, players }:
   { turns: number,
     pop: number,

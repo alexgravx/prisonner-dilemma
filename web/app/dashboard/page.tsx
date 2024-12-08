@@ -2,7 +2,7 @@
 
 import React from "react";
 import {SliderValue} from "@nextui-org/react";
-import {ResultLineChart} from "@/components/custom-chart"
+import {ArenaChart} from "@/components/custom-chart"
 
 import Parameters from "./parameters"
 import Players from "./players";
@@ -31,7 +31,7 @@ export default function Home() {
       <h1 className="mt-10">
         Arena Results
       </h1>
-      <ResultLineChart
+      <ArenaChart
         turns={Number(turns)}
         pop={Number(pop)}
         T={Number(T)}

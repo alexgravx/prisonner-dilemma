@@ -1,16 +1,15 @@
 "use client";
 
 import Link from "next/link"
-import {Button} from "@nextui-org/react";
 import { ModeToggle } from "@/components/mode-toggle"
-import {HeroHighlightDemo} from "@/components/welcome-background"
+import {GridBackground} from "@/components/welcome-background"
 import { Highlight } from "@/components/ui/hero-highlight";
-import { BackgroundGradientDemo } from "@/components/light-box";
-import { HoverBorderGradientDemo } from "@/components/custom-button"
+import { HoverNeonBox } from "@/components/light-box";
+import { HoverButton } from "@/components/custom-button"
 
 export default function Provider() {
   return (
-    <HeroHighlightDemo>
+    <GridBackground>
       <div className="flex md:flex-col lg:flex-row justify-between items-center w-[80vw]">
         <div className="flex flex-col justify-center items-baseline min-w-[40vw]">
           <div>
@@ -28,12 +27,12 @@ export default function Provider() {
               <ModeToggle />
             </div>
             <Link href="/dashboard">
-              <HoverBorderGradientDemo />
+              <HoverButton />
             </Link>
           </div>
         </div>
-        <BackgroundGradientDemo />
+        <HoverNeonBox />
       </div>
-    </HeroHighlightDemo>
+    </GridBackground>
   )
 }

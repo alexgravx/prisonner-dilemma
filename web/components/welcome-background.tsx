@@ -6,7 +6,7 @@ interface Props {
     children: React.ReactNode;
   }
 
-export const HeroHighlightDemo: React.FC<Props> = ({ children }) => {
+export const GridBackground: React.FC<Props> = ({ children }) => {
   return (
     <HeroHighlight>
       <motion.h1
