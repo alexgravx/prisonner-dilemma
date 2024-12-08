@@ -17,17 +17,26 @@ export default function Home() {
   const [D, setD] = React.useState<SliderValue>(0);
 
   return (
-    <div className="prose dark:prose-invert min-w-[55rem]">
+    <div className="prose dark:prose-invert min-w-[55rem] mt-14">
+      <h1 className="mt-10">
+        Game Parameters
+      </h1>
       <Parameters 
         turns={turns} setTurns={setTurns}
         pop={pop} setPop={setPop}
         T={T} setT={setT} C={C} setC={setC}
         P={P} setP={setP} D={D} setD={setD}
       />
+      <h1 className="mt-10">
+        Players selection
+      </h1>
       <Players
         playersSelected={playersSelected}
         setPlayersSelected={setPlayersSelected}
       />
+      <p className="mt-4 ml-1 text-default-500">
+        Selected: {playersSelected.join(", ")}
+      </p>
       <h1 className="mt-10">
         Arena Results
       </h1>

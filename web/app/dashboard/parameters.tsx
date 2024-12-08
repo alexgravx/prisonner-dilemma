@@ -29,9 +29,6 @@ export default function Parameters({
 }: ParametersType) {
   return (
     <div>
-      <h1 className="mt-10">
-        Dilemma game Parameters
-      </h1>
       <div className="flex flex-row justify-around">
         <div className="flex flex-col w-80">
           <Slider size="lg" step={1} color="primary" label="Tentation"
