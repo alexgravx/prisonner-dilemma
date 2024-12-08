@@ -4,7 +4,8 @@ import React from "react";
 import {SliderValue} from "@nextui-org/react";
 import {ArenaChart} from "@/components/custom-chart"
 
-import Parameters from "./parameters"
+import GameParameters from "./game-parameters"
+import ArenaParameters from "./arena-parameters"
 import Players from "./players";
 
 export default function Home() {
@@ -17,15 +18,20 @@ export default function Home() {
   const [D, setD] = React.useState<SliderValue>(0);
 
   return (
-    <div className="prose dark:prose-invert min-w-[55rem] mt-14">
+    <div className="prose dark:prose-invert min-w-[80rem] mt-20">
       <h1 className="mt-10">
         Game Parameters
       </h1>
-      <Parameters 
-        turns={turns} setTurns={setTurns}
-        pop={pop} setPop={setPop}
+      <GameParameters 
         T={T} setT={setT} C={C} setC={setC}
         P={P} setP={setP} D={D} setD={setD}
+      />
+      <h1 className="mt-10">
+        Arena Parameters
+      </h1>
+      <ArenaParameters
+        turns={turns} setTurns={setTurns}
+        pop={pop} setPop={setPop}
       />
       <h1 className="mt-10">
         Players selection
