@@ -1,15 +1,18 @@
 "use client"
 
 import { useTheme } from "next-themes"
+import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 
 export function ModeToggle() {
   const { setTheme, theme } = useTheme()
 
   return (
-    <button
-      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-      className="border rounded-md w-6 h-6 flex items-center justify-center">
-      <span className="sr-only">Toggle mode</span>
+    <HoverBorderGradient
+      containerClassName="rounded-full"
+      as="button"
+      className="dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2"
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+      <span className="text-base">Toggle Theme</span>
       {theme !== "dark" ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -39,6 +42,6 @@ export function ModeToggle() {
           />
         </svg>
       )}
-    </button>
+    </HoverBorderGradient>
   )
 }

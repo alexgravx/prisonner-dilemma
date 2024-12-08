@@ -26,13 +26,21 @@ export default function Provider() {
               Cooperate ?
             </Highlight>
           </div>
-          <div className="flex justify-center items-center my-10">
-            <div className={"mx-8"}>
+          <div className="flex gap-8 items-center justify-center xl:justify-start mt-10">
+            <div>
               <ModeToggle />
             </div>
             <Link href="/dashboard">
               <HoverButton />
             </Link>
+          </div>
+          <div className="text-xs font-medium dark:text-[#c1c1c1] mt-10">
+            {"Created by "}
+            <a
+              href="https://github.com/alexgravx"
+              className="underline hover:text-indigo-500 transition ease-in-out duration-500">
+                Alexandre Gravereaux
+            </a>
           </div>
         </div>
         <HoverNeonBox />
