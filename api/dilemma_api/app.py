@@ -32,6 +32,10 @@ class DataInput(BaseModel):
     D: int = 0,
     player_list: list[str] | None = Query(default=None)
 
+@app.get("/ping")
+def get_ping():
+    return "pong"
+
 @app.post("/arena")
 def get_arena(data: DataInput) -> list[Strategy]:
     print(data)

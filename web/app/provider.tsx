@@ -1,6 +1,7 @@
 "use client"
 
 import { ThemeProvider } from "@/components/other/theme-provider"
+import ServerStatus from "@/components/other/server-status"
 import { NextUIProvider } from "@nextui-org/react";
 
 export interface ProvidersProps {
@@ -13,6 +14,7 @@ export default function RootLayout({ children }: ProvidersProps) {
       <NextUIProvider>
       {children}
       </NextUIProvider>
+      <ServerStatus />
     </ThemeProvider>
   )
 }
