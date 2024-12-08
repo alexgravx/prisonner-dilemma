@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link"
-import { ModeToggle } from "@/components/mode-toggle"
-import { GridBackground } from "@/components/welcome-background"
+import { ModeToggle } from "@/components/custom-theme-toggle"
+import { GridBackground } from "@/components/custom-grid-background"
 import { Highlight } from "@/components/ui/hero-highlight";
-import { HoverNeonBox } from "@/components/neon-box";
+import { HoverNeonBox } from "@/components/custom-neon-box";
 import { HoverButton } from "@/components/custom-button"
 
 export default function Provider() {
