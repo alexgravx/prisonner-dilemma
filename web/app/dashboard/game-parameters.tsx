@@ -22,25 +22,25 @@ export default function GameParameters({
   D, setD
 }: ParametersType) {
   return (
-    <div className="flex flex-row justify-around">
-      <div className="flex flex-col w-80">
+    <div className="flex flex-row justify-around my-6">
+      <div className="flex flex-col justify-around h-36 w-80">
         <Slider size="md" step={1} color="primary" label="Tentation"
         showSteps={true} maxValue={7} minValue={0} value={T}
-        onChange={setT} className="max-w-md"
+        onChange={setT} className="max-w-xs"
         />
         <Slider size="md" step={1} color="primary" label="Cooperation"
         showSteps={true} maxValue={7} minValue={0} value={C}
-        onChange={setC} className="max-w-md"
+        onChange={setC} className="max-w-xs"
         />
       </div>
-      <div className="flex flex-col w-80">
+      <div className="flex flex-col justify-around h-36 w-80">
         <Slider size="md" step={1} color="primary" label="Punishment"
         showSteps={true} maxValue={7} minValue={0} value={P}
-        onChange={setP} className="max-w-md"
+        onChange={setP} className="max-w-xs"
         />
         <Slider size="md" step={1} color="primary" label="Duperie"
         showSteps={true} maxValue={7} minValue={0} value={D}
-        onChange={setD} className="max-w-md"
+        onChange={setD} className="max-w-xs"
         />
       </div>
     </div>

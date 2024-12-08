@@ -16,14 +16,14 @@ export default function ArenaParameters({
   pop, setPop
 }: ParametersType) {
   return (
-    <div className="flex flex-row justify-around">
+    <div className="flex flex-col justify-around items-center h-36 my-6">
         <Slider size="md" step={1} color="primary" label="Population"
         showSteps={false} maxValue={300} minValue={20} value={pop}
-        onChange={setPop} className="max-w-sm"
+        onChange={setPop} className="max-w-xs"
         />
         <Slider size="md" step={1} color="primary" label="Nb of rounds"
         showSteps={false} maxValue={300} minValue={20} value={turns}
-        onChange={setTurns} className="max-w-sm"
+        onChange={setTurns} className="max-w-xs"
         />
     </div>
   )

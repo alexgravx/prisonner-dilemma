@@ -72,7 +72,7 @@ export function ArenaChart(
   }, [turns, pop, T, C, P, D, players]);
 
   return (
-    <ResponsiveContainer width="100%" height="100%" className="min-h-[40rem]">
+    <ResponsiveContainer width="100%" height="100%" className="min-h-[40rem] my-6">
       <LineChart
         width={500}
         height={800}

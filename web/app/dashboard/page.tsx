@@ -1,12 +1,45 @@
 "use client";
 
 import React from "react";
-import {SliderValue} from "@nextui-org/react";
-import {ArenaChart} from "@/components/custom-chart"
+import { SliderValue } from "@nextui-org/react";
+import { ArenaChart } from "@/components/custom-chart"
+
+import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid"
+import {
+  IconClipboardCopy,
+  IconFileBroken,
+  IconSignature,
+  IconTableColumn,
+} from "@tabler/icons-react";
 
 import GameParameters from "./game-parameters"
 import ArenaParameters from "./arena-parameters"
 import Players from "./players";
+
+type Bento = {
+  className?: string;
+  title?: string | React.ReactNode;
+  description?: string | React.ReactNode;
+  header?: React.ReactNode;
+  icon?: React.ReactNode;
+}
+
+function BentoGridSecondDemo({ items } : { items: Bento[] }) {
+  return (
+    <BentoGrid className="max-w-[80rem] mx-auto md:auto-rows-min">
+      {items.map((item, i) => (
+        <BentoGridItem
+          key={i}
+          title={item.title}
+          description={item.description}
+          header={item.header}
+          className={item.className}
+          icon={item.icon}
+        />
+      ))}
+    </BentoGrid>
+  );
+}
 
 export default function Home() {
   const [playersSelected, setPlayersSelected] = React.useState<string[]>(['Donnant_Donnant', 'MajoMou']);
@@ -17,36 +50,45 @@ export default function Home() {
   const [P, setP] = React.useState<SliderValue>(1);
   const [D, setD] = React.useState<SliderValue>(0);
 
-  return (
-    <div className="prose dark:prose-invert min-w-[80rem] mt-20">
-      <h1 className="mt-10">
-        Game Parameters
-      </h1>
-      <GameParameters 
+  const items = [
+    {
+      title: "Game Parameters",
+      description: "Select parameters for the dilemma",
+      header: 
+        <GameParameters 
         T={T} setT={setT} C={C} setC={setC}
         P={P} setP={setP} D={D} setD={setD}
-      />
-      <h1 className="mt-10">
-        Arena Parameters
-      </h1>
-      <ArenaParameters
-        turns={turns} setTurns={setTurns}
-        pop={pop} setPop={setPop}
-      />
-      <h1 className="mt-10">
-        Players selection
-      </h1>
-      <Players
+        />,
+      className: "md:col-span-2",
+      icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
+    },
+    {
+      title: "Arena Parameters",
+      description: "Select parameters for the arena fight",
+      header:
+        <ArenaParameters
+          turns={turns} setTurns={setTurns}
+          pop={pop} setPop={setPop}
+        />,
+      className: "md:col-span-1",
+      icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
+    },
+    {
+      title: "Player Selection",
+      description: "Select the players to fight in the arena",
+      header:
+        <Players
         playersSelected={playersSelected}
         setPlayersSelected={setPlayersSelected}
-      />
-      <p className="mt-4 ml-1 text-default-500">
-        Selected: {playersSelected.join(", ")}
-      </p>
-      <h1 className="mt-10">
-        Arena Results
-      </h1>
-      <ArenaChart
+        />,
+      className: "md:col-span-3",
+      icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+    },
+    {
+      title: "Arena Results",
+      description: "Results of the arena fight, population over time for each player",
+      header:
+        <ArenaChart
         turns={Number(turns)}
         pop={Number(pop)}
         T={Number(T)}
@@ -54,7 +96,18 @@ export default function Home() {
         P={Number(P)}
         D={Number(D)}
         players={playersSelected}
-      />
+        />,
+      className: "md:col-span-3",
+      icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
+    },
+  ];
+
+  return (
+    <div className="prose dark:prose-invert min-w-[80rem] mt-20">
+      <BentoGridSecondDemo items={items} />
+      <p className="mt-4 ml-1 text-default-500">
+        Selected: {playersSelected.join(", ")}
+      </p>
     </div>
   )
 }
