@@ -27,12 +27,12 @@ async function getData(url:URL, data_input:DataInput) {
 
     const json = await response.json();
     return json
-  } catch (error: any) {
-    console.error(error.message);
+  } catch (error) {
+    console.error(error);
   }
 }
 
-var colors = ["#ffffff", "#356000", "#148f77", "#d35400", "#1b4f72", "#85c1e9", "#f4d03f", "#283747", "#d98880", "#148f77", "#e74c3c", "#d2b4de"]
+const colors = ["#ffffff", "#356000", "#148f77", "#d35400", "#1b4f72", "#85c1e9", "#f4d03f", "#283747", "#d98880", "#148f77", "#e74c3c", "#d2b4de"]
 
 export function ArenaChart(
   { turns, pop, T, C, P, D, players }:
@@ -57,6 +57,7 @@ export function ArenaChart(
       }
     } catch (error) {
       setIsServerUp(false);
+      console.log(error)
     }
   };
 
@@ -71,16 +72,18 @@ export function ArenaChart(
       player_list: string[]
     ) {
       const url = new URL("http://localhost:8000/arena");
-      let data_input = {
-        turns: turns,
-        pop: pop,
-        T: T,
-        P: P,
-        C: C,
-        D: D,
-        player_list: player_list
-      }
-      let data_output = await getData(url, data_input)
+      const data_output = await getData(
+        url,
+        {
+          turns: turns,
+          pop: pop,
+          T: T,
+          P: P,
+          C: C,
+          D: D,
+          player_list: player_list
+        }
+      )
       setChartData(data_output);
     }
     getChartData(turns, pop, T, C, P, D, players);
@@ -113,7 +116,7 @@ export function ArenaChart(
           <YAxis />
           <Tooltip active={false}/>
           <Legend />
-          {players.map((player:any, index:number) => 
+          {players.map((player:string, index:number) =>
           <Line 
             type="monotone"
             key={index}

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
@@ -15,6 +14,7 @@ const ServerStatus = () => {
       }
     } catch (error) {
       setIsServerUp(false);
+      console.log(error)
     }
   };
 
