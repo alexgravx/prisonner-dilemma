@@ -4,11 +4,13 @@ import { BackgroundGradient } from "@/components/ui/background-gradient";
 import Image from "next/image";
 
 export function HoverNeonBox() {
+  const images = ['/PrisonnerNeighbour.jpg', '/PrisonnerMath.jpg', '/PrisonnerSimulation.jpg']
+  const selected_image = images[Math.floor(Math.random() * 3)]
   return (
     <div>
       <BackgroundGradient className="rounded-[22px] max-w-sm p-4 sm:p-10 bg-white dark:bg-zinc-900">
         <Image
-          src={`/PrisonnerSimulation.jpg`}
+          src={selected_image}
           alt="jordans"
           height="400"
           width="400"
