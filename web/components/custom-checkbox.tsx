@@ -3,10 +3,7 @@ import {Checkbox, User, cn} from "@nextui-org/react";
 type user = {
   name: string,
   avatar: string,
-  status?: string,
 }
-
-type status = "default" | "primary" | "secondary" | "success" | "warning" | "danger" | undefined
 
 export const CustomCheckbox = ({ user, value }: { user:user, value:string }) => {
   return (

@@ -1,16 +1,21 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BackgroundGradient } from "@/components/ui/background-gradient";
 import Image from "next/image";
 
 export function HoverNeonBox() {
   const images = ['/PrisonnerNeighbour.jpg', '/PrisonnerMath.jpg', '/PrisonnerSimulation.jpg']
-  const selected_image = images[Math.floor(Math.random() * 3)]
+  const [selectedImage, setImage] = useState('/PrisonnerNeighbour.jpg')
+  
+  useEffect(() => {
+    setImage(images[Math.floor(Math.random() * 3)])
+  }, [])
+
   return (
     <div>
       <BackgroundGradient className="rounded-[22px] max-w-sm p-4 sm:p-10 bg-white dark:bg-zinc-900">
         <Image
-          src={selected_image}
+          src={selectedImage}
           alt="jordans"
           height="400"
           width="400"
