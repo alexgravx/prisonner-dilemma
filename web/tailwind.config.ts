@@ -1,10 +1,9 @@
-/** @type {import('tailwindcss').Config} */
-
-const {nextui} = require("@nextui-org/react");
-const svgToDataUri = require("mini-svg-data-uri");
+import type { Config } from "tailwindcss";
+import { nextui } from "@nextui-org/react";
+import svgToDataUri from "mini-svg-data-uri";
 const { default: flattenColorPalette } = require("tailwindcss/lib/util/flattenColorPalette");
 
-module.exports = {
+export default {
   content: [
     "./app/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -61,15 +60,6 @@ module.exports = {
   			}
   		}
   	},
-  	borderWidth: {
-  		'0': '0',
-  		'2': '2px',
-  		'3': '3px',
-  		'4': '4px',
-  		'6': '6px',
-  		'12': '12px',
-  		DEFAULT: '1px'
-  	}
   },
   darkMode: "class",
   plugins: [
@@ -77,10 +67,10 @@ module.exports = {
     require("@tailwindcss/typography"),
     require("tailwindcss-animate"),
 	addVariablesForColors,
-    function ({ matchUtilities, theme }) {
+    function ({ matchUtilities, theme }: {matchUtilities: any, theme:any}) {
       matchUtilities(
         {
-          "bg-dot-thick": (value) => ({
+          "bg-dot-thick": (value:any) => ({
             backgroundImage: `url("${svgToDataUri(
               `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="none"><circle fill="${value}" id="pattern-circle" cx="10" cy="10" r="2.5"></circle></svg>`
             )}")`,
@@ -89,11 +79,11 @@ module.exports = {
         { values: flattenColorPalette(theme("backgroundColor")), type: "color" }
       );
     },
-],
-}
+	],
+} satisfies Config;
 
 // This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
-function addVariablesForColors({ addBase, theme }) {
+function addVariablesForColors({ addBase, theme }: {addBase:any, theme:any}) {
 	let allColors = flattenColorPalette(theme("colors"));
 	let newVars = Object.fromEntries(
 	  Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
@@ -102,4 +92,4 @@ function addVariablesForColors({ addBase, theme }) {
 	addBase({
 	  ":root": newVars,
 	});
-  }
+}
