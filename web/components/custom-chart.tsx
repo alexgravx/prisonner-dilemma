@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { IconServerOff } from "@tabler/icons-react"
 
 type DataInput = {
     turns: number,
@@ -31,7 +32,7 @@ async function getData(url:URL, data_input:DataInput) {
   }
 }
 
-var colors = ["#111111", "#356000", "#148f77", "#d35400", "#1b4f72", "#85c1e9", "#f4d03f", "#283747", "#d98880", "#148f77", "#e74c3c", "#d2b4de"]
+var colors = ["#ffffff", "#356000", "#148f77", "#d35400", "#1b4f72", "#85c1e9", "#f4d03f", "#283747", "#d98880", "#148f77", "#e74c3c", "#d2b4de"]
 
 export function ArenaChart(
   { turns, pop, T, C, P, D, players }:
@@ -44,6 +45,20 @@ export function ArenaChart(
     players: string[] }
 ) {
   const [chartData, setChartData] = useState([]);
+  const [isServerUp, setIsServerUp] = useState(true);
+
+  const checkServerStatus = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/ping");
+      if (response.status === 200) {
+        setIsServerUp(true);
+      } else {
+        setIsServerUp(false);
+      }
+    } catch (error) {
+      setIsServerUp(false);
+    }
+  };
 
   useEffect(() => {
     async function getChartData(
@@ -69,37 +84,54 @@ export function ArenaChart(
       setChartData(data_output);
     }
     getChartData(turns, pop, T, C, P, D, players);
+
+    // Check server status on component mount
+    checkServerStatus();
+    // Set up an interval to check the server status every 10 seconds
+    const intervalId = setInterval(checkServerStatus, 20000);
+    // Clean up the interval on component unmount
+    return () => clearInterval(intervalId);
+
   }, [turns, pop, T, C, P, D, players]);
 
-  return (
-    <ResponsiveContainer width="100%" height="100%" className="min-h-[40rem] my-6">
-      <LineChart
-        width={500}
-        height={800}
-        data={chartData}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="turn" />
-        <YAxis />
-        <Tooltip active={false}/>
-        <Legend />
-        {players.map((player:any, index:number) => 
-        <Line 
-          type="monotone"
-          key={index}
-          dataKey={player}
-          stroke={colors[index]}
-          strokeWidth={2}
-          dot={false}
-        />)
-        }
-      </LineChart>
-    </ResponsiveContainer>
-  );
+  if (isServerUp) {
+    return (
+      <ResponsiveContainer width="100%" height="100%" className="min-h-[40rem] my-6">
+        <LineChart
+          width={500}
+          height={800}
+          data={chartData}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="turn" />
+          <YAxis />
+          <Tooltip active={false}/>
+          <Legend />
+          {players.map((player:any, index:number) => 
+          <Line 
+            type="monotone"
+            key={index}
+            dataKey={player}
+            stroke={colors[index]}
+            strokeWidth={2}
+            dot={false}
+          />)
+          }
+        </LineChart>
+      </ResponsiveContainer>
+    )
+  } else {
+    return (
+      <div className="flex justify-center items-center gap-2 my-6">
+        No results... The server is down
+        <IconServerOff className="h-4 w-4 text-neutral-500"/>
+      </div>
+    )
+  }
 }

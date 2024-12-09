@@ -14,6 +14,7 @@ import {
 
 import GameParameters from "./game-parameters"
 import ArenaParameters from "./arena-parameters"
+import Header from "./header";
 import Players from "./players";
 
 type Bento = {
@@ -103,8 +104,11 @@ export default function Home() {
   ];
 
   return (
-    <div className="prose dark:prose-invert min-w-[80rem] mt-20">
-      <FullBentoGrid items={items} />
+    <div>
+    <Header />
+      <div className="prose dark:prose-invert min-w-[80rem] mt-20">
+        <FullBentoGrid items={items} />
+      </div>
     </div>
   )
 }
