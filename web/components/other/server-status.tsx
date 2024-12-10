@@ -6,7 +6,7 @@ const ServerStatus = () => {
 
   const checkServerStatus = async () => {
     try {
-      const response = await fetch("http://localhost:8000/ping");
+      const response = await fetch(`http://${process.env.NEXT_PUBLIC_BACKEND_URL}:${process.env.NEXT_PUBLIC_BACKEND_PORT}/ping`);
       if (response.status === 200) {
         setIsServerUp(true);
       } else {
