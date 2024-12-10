@@ -4,6 +4,7 @@ requirements = """
 pip>=24.3.1
 fastapi>=0.115.5
 hypercorn==0.14.4
+python-dotenv==1.0.1
 """
 
 setup(
