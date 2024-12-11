@@ -14,6 +14,7 @@ origins = [
     f"http://{os.getenv('FRONTEND_URL')}",
     f"http://{os.getenv('FRONTEND_URL')}:8080",
     f"http://{os.getenv('FRONTEND_URL')}:{os.getenv('FRONTEND_PORT')}",
+    f"https://{os.getenv('FRONTEND_URL')}:{os.getenv('FRONTEND_PORT')}",
 ]
 
 app.add_middleware(
