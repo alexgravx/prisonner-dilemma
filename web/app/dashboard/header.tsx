@@ -4,7 +4,7 @@ import { SmallModeToggle } from "@/components/custom-theme-toggle"
 export default function Header() {
   return (
     <header>
-      <div className="flex items-center justify-between m-4">
+      <div className="flex items-center justify-between m-4 mt-20 md:m-4">
         <SmallModeToggle />
         <nav className="ml-auto text-sm font-medium space-x-6">
           <Link href="/">Home</Link>

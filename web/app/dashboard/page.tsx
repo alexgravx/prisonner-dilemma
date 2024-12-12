@@ -27,7 +27,7 @@ type Bento = {
 
 function FullBentoGrid({ items } : { items: Bento[] }) {
   return (
-    <BentoGrid className="max-w-[80rem] mx-auto md:auto-rows-min">
+    <BentoGrid className="max-w-[20rem] sm:max-w-[30rem] md:max-w-[40rem] lg:max-w-[60rem] xl:max-w-[80rem] mx-auto md:auto-rows-min">
       {items.map((item, i) => (
         <BentoGridItem
           key={i}
@@ -60,7 +60,7 @@ export default function Home() {
         T={T} setT={setT} C={C} setC={setC}
         P={P} setP={setP} D={D} setD={setD}
         />,
-      className: "md:col-span-2",
+      className: "lg:col-span-2",
       icon: <IconBrain className="h-4 w-4 text-neutral-500" />,
     },
     {
@@ -71,7 +71,7 @@ export default function Home() {
           turns={turns} setTurns={setTurns}
           pop={pop} setPop={setPop}
         />,
-      className: "md:col-span-1",
+      className: "lg:col-span-1",
       icon: <IconChartCandle className="h-4 w-4 text-neutral-500" />,
     },
     {
@@ -82,7 +82,7 @@ export default function Home() {
         playersSelected={playersSelected}
         setPlayersSelected={setPlayersSelected}
         />,
-      className: "md:col-span-3",
+      className: "lg:col-span-3",
       icon: <IconBrandAmongUs className="h-4 w-4 text-neutral-500" />,
     },
     {
@@ -98,7 +98,7 @@ export default function Home() {
         D={Number(D)}
         players={playersSelected}
         />,
-      className: "md:col-span-3",
+      className: "lg:col-span-3",
       icon: <IconChartAreaLine className="h-4 w-4 text-neutral-500" />,
     },
   ];
@@ -106,7 +106,7 @@ export default function Home() {
   return (
     <div>
     <Header />
-      <div className="prose dark:prose-invert min-w-[80rem] mt-20">
+      <div className="prose dark:prose-invert lg:min-w-[60rem] xl:min-w-[80rem] mt-20">
         <FullBentoGrid items={items} />
       </div>
     </div>

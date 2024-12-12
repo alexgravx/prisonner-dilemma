@@ -34,7 +34,7 @@ export default function Provider() {
               <HoverButton />
             </Link>
           </div>
-          <div className="text-xs font-medium dark:text-[#c1c1c1] mt-10">
+          <div className="text-xs font-medium dark:text-[#c1c1c1] my-6">
             {"Created by "}
             <a
               href="https://github.com/alexgravx"

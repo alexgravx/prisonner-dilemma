@@ -14,7 +14,7 @@ export default function Players({playersSelected, setPlayersSelected}: Players) 
     <CheckboxGroup
       value={playersSelected}
       onChange={setPlayersSelected}
-      classNames={{wrapper: "grid grid-cols-4 gap-4 my-6 mx-10"}}
+      classNames={{wrapper: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-6 mx-10"}}
     >
       <CustomCheckbox
         value="Donnant_Donnant"
