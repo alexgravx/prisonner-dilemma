@@ -43,7 +43,7 @@ function FullBentoGrid({ items } : { items: Bento[] }) {
 }
 
 export default function Home() {
-  const [playersSelected, setPlayersSelected] = React.useState<string[]>(['Donnant_Donnant', 'MajoMou']);
+  const [playersSelected, setPlayersSelected] = React.useState<string[]>(['Donnant_Donnant', 'MajoMou', 'Sondeur', 'Periodique_cct']);
   const [turns, setTurns] = React.useState<SliderValue>(100);
   const [pop, setPop] = React.useState<SliderValue>(100);
   const [T, setT] = React.useState<SliderValue>(5);
