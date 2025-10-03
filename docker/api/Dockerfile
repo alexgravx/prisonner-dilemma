@@ -6,7 +6,8 @@ FROM python:3-alpine
 WORKDIR /app
 
 # Copy local code to the container image.
-COPY . .
+COPY ./pkg ./pkg
+COPY ./api ./api
 
 # Install project dependencies
 RUN pip install --upgrade build setuptools
@@ -14,4 +15,4 @@ RUN pip install --no-cache-dir ./pkg
 RUN pip install --no-cache-dir ./api
 
 # Run the web service on container startup.
-CMD ["hypercorn", "./api/dilemma_api/app:app", "--bind", "::"]
+CMD ["hypercorn", "./api/dilemma_api/app:app", "--bind", "0.0.0.0"]

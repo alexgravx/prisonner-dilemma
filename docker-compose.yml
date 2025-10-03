@@ -1,0 +1,80 @@
+services:
+  web:
+      build:
+        context: .
+        dockerfile: docker/web/Dockerfile
+        args:
+          NEXT_PUBLIC_BACKEND_URL: "prisoner.alexandregravereaux.xyz"
+          NEXT_PUBLIC_BACKEND_PORT: "8000"
+        platforms:
+          - "linux/amd64"
+          - "linux/arm64"
+      image: alexgravx/prisonner-web
+      networks:
+        - backend
+      ports:
+        - "3000:3000"
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.api.rule=Host(`dilemma.alexandregravereaux.xyz`)"
+        - "traefik.http.routers.api.entrypoints=websecure"
+        - "traefik.http.routers.api.tls=true"
+        - "traefik.http.routers.api.tls.certresolver=le"
+  api:
+    build:
+      context: .
+      dockerfile: docker/api/Dockerfile
+      platforms:
+        - "linux/amd64"
+        - "linux/arm64"
+    image: alexgravx/prisonner-api
+    networks:
+      - backend
+    ports:
+        - "8000:8000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.rule=Host(`dilemma.alexandregravereaux.xyz`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.api.entrypoints=websecure"
+      - "traefik.http.routers.api.tls=true"
+      - "traefik.http.routers.api.tls.certresolver=le"
+  traefik:
+    image: "traefik:v3.4"
+    container_name: "traefik"
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - backend
+    command:
+      - "--api.insecure=false"
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=backend"
+      - "--entryPoints.web.address=:80"
+      - "--entryPoints.websecure.address=:443"
+      - "--entryPoints.websecure.http.tls=true"
+      - "--entryPoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entryPoints.web.http.redirections.entryPoint.scheme=https"
+      - "--certificatesresolvers.le.acme.email=test@gmail.com"
+      - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./letsencrypt:/letsencrypt"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=Host(`prisoner.alexandregravereaux.xyz`) && PathPrefix(`/dashboard`)"
+      - "traefik.http.routers.dashboard.entrypoints=websecure"
+      - "traefik.http.routers.dashboard.service=api@internal"
+      - "traefik.http.routers.dashboard.tls=true"
+      - "traefik.http.routers.dashboard.tls.certresolver=le"
+
+networks:
+  backend:
+    name: backend

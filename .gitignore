@@ -3,6 +3,7 @@ dist/
 *.egg
 *.egg-info
 build/
+letsencrypt/
 
 # Environments
 .env
