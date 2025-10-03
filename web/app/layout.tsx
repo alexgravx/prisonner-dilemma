@@ -1,6 +1,5 @@
 import "./globals.css"
 import { Inter } from "next/font/google"
-import { Analytics } from "@/components/other/analytics"
 import Provider from "./provider"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -26,7 +25,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <Provider>
           <main className="flex items-center justify-center">{children}</main>
         </Provider>
-        <Analytics />
       </body>
     </html>
   )

@@ -5,24 +5,30 @@ services:
         - backend
       ports:
         - "3000:3000"
-      labels:
-        - "traefik.enable=true"
-        - "traefik.http.routers.web.rule=Host(`prisoner.alexandregravereaux.xyz`)"
-        - "traefik.http.routers.web.entrypoints=websecure"
-        - "traefik.http.routers.web.tls=true"
-        - "traefik.http.routers.web.tls.certresolver=le"
+      deploy:
+        replicas: 1
+        labels:
+          - "traefik.enable=true"
+          - "traefik.http.routers.web.rule=Host(`prisoner.alexandregravereaux.xyz`)"
+          - "traefik.http.routers.web.entrypoints=websecure"
+          - "traefik.http.routers.web.tls=true"
+          - "traefik.http.routers.web.tls.certresolver=le"
+          - "traefik.http.services.web.loadbalancer.server.port=3000"
   api:
     image: alexgravx/prisonner-api:latest
     networks:
       - backend
     ports:
         - "8000:8000"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.api.rule=Host(`prisoner.alexandregravereaux.xyz`) && PathPrefix(`/api`)"
-      - "traefik.http.routers.api.entrypoints=websecure"
-      - "traefik.http.routers.api.tls=true"
-      - "traefik.http.routers.api.tls.certresolver=le"
+    deploy:
+      replicas: 2
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.api.rule=Host(`prisoner.alexandregravereaux.xyz`) && PathPrefix(`/api`)"
+        - "traefik.http.routers.api.entrypoints=websecure"
+        - "traefik.http.routers.api.tls=true"
+        - "traefik.http.routers.api.tls.certresolver=le"
+        - "traefik.http.services.web.loadbalancer.server.port=8000"
   traefik:
     image: "traefik:v3.4"
     container_name: "traefik"
@@ -34,9 +40,9 @@ services:
     command:
       - "--api.insecure=false"
       - "--api.dashboard=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--providers.docker.network=backend"
+      - "--providers.swarm.endpoint=unix:///var/run/docker.sock"
+      - "--providers.swarm.watch=true"
+      - "--providers.swarm.exposedbydefault=false"
       - "--entryPoints.web.address=:80"
       - "--entryPoints.websecure.address=:443"
       - "--entryPoints.websecure.http.tls=true"
@@ -49,6 +55,12 @@ services:
       - "80:80"
       - "443:443"
       - "8080:8080"
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager  # Traefik on manager node
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "./letsencrypt:/letsencrypt"
