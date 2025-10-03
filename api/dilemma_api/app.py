@@ -37,11 +37,11 @@ class DataInput(BaseModel):
     D: int = 0,
     player_list: list[str] | None = Query(default=None)
 
-@app.get("/ping")
+@app.get("/api/ping")
 def get_ping():
     return "pong"
 
-@app.post("/arena")
+@app.post("/api/arena")
 def get_arena(data: DataInput) -> list[Strategy]:
     arena_turns = main.main(data.turns, data.pop, data.T, data.C, data.P, data.D, data.player_list)
     arena_result = [Strategy(root=turn) for turn in arena_turns]
