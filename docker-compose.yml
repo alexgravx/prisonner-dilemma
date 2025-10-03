@@ -63,7 +63,7 @@ services:
       - "./letsencrypt:/letsencrypt"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.dashboard.rule=Host(`prisoner.alexandregravereaux.xyz`) && PathPrefix(`/traefik-dashboard`)"
+      - "traefik.http.routers.dashboard.rule=Host(`prisoner.alexandregravereaux.xyz`)"
       - "traefik.http.routers.dashboard.entrypoints=websecure"
       - "traefik.http.routers.dashboard.service=api@internal"
       - "traefik.http.routers.dashboard.tls=true"

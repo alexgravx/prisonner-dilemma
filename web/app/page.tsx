@@ -30,7 +30,7 @@ export default function Provider() {
             <div>
               <ModeToggle />
             </div>
-            <Link href="/dashboard">
+            <Link href="/dilema-dashboard">
               <HoverButton />
             </Link>
           </div>
