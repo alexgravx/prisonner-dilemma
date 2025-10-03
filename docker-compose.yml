@@ -6,9 +6,6 @@ services:
         args:
           NEXT_PUBLIC_BACKEND_URL: "prisoner.alexandregravereaux.xyz"
           NEXT_PUBLIC_BACKEND_PORT: "8000"
-        platforms:
-          - "linux/amd64"
-          - "linux/arm64"
       image: alexgravx/prisonner-web
       networks:
         - backend
@@ -24,9 +21,6 @@ services:
     build:
       context: .
       dockerfile: docker/api/Dockerfile
-      platforms:
-        - "linux/amd64"
-        - "linux/arm64"
     image: alexgravx/prisonner-api
     networks:
       - backend
