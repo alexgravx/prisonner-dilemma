@@ -9,7 +9,7 @@ services:
         replicas: 1
         labels:
           - "traefik.enable=true"
-          - "traefik.http.routers.web.rule=Host(`prisoner.alexandregravereaux.xyz`)"
+          - "traefik.http.routers.web.rule=Host(`prisoner.alexgravx.com`)"
           - "traefik.http.routers.web.entrypoints=websecure"
           - "traefik.http.routers.web.tls=true"
           - "traefik.http.routers.web.tls.certresolver=le"
@@ -24,7 +24,7 @@ services:
       replicas: 2
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.api.rule=Host(`prisoner.alexandregravereaux.xyz`) && PathPrefix(`/api`)"
+        - "traefik.http.routers.api.rule=Host(`prisoner.alexgravx.com`) && PathPrefix(`/api`)"
         - "traefik.http.routers.api.entrypoints=websecure"
         - "traefik.http.routers.api.tls=true"
         - "traefik.http.routers.api.tls.certresolver=le"
@@ -66,7 +66,7 @@ services:
       - "./letsencrypt:/letsencrypt"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.dashboard.rule=Host(`traefik.prisoner.alexandregravereaux.xyz`)"
+      - "traefik.http.routers.dashboard.rule=Host(`traefik.prisoner.alexgravx.com`)"
       - "traefik.http.routers.dashboard.entrypoints=websecure"
       - "traefik.http.routers.dashboard.service=api@internal"
       - "traefik.http.routers.dashboard.tls=true"
