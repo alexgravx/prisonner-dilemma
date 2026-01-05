@@ -1,77 +1,26 @@
 services:
   web:
       image: alexgravx/prisonner-web:latest
-      networks:
-        - backend
-      ports:
-        - "3000:3000"
-      deploy:
-        replicas: 1
-        labels:
-          - "traefik.enable=true"
-          - "traefik.http.routers.web.rule=Host(`prisoner.alexgravx.com`)"
-          - "traefik.http.routers.web.entrypoints=websecure"
-          - "traefik.http.routers.web.tls=true"
-          - "traefik.http.routers.web.tls.certresolver=le"
-          - "traefik.http.services.web.loadbalancer.server.port=3000"
-  api:
-    image: alexgravx/prisonner-api:latest
-    networks:
-      - backend
-    ports:
-        - "8000:8000"
-    deploy:
-      replicas: 2
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.api.rule=Host(`prisoner.alexgravx.com`) && PathPrefix(`/api`)"
-        - "traefik.http.routers.api.entrypoints=websecure"
-        - "traefik.http.routers.api.tls=true"
-        - "traefik.http.routers.api.tls.certresolver=le"
-        - "traefik.http.services.web.loadbalancer.server.port=8000"
-  traefik:
-    image: "traefik:v3.4"
-    container_name: "traefik"
-    restart: unless-stopped
-    security_opt:
-      - no-new-privileges:true
-    networks:
-      - backend
-    command:
-      - "--api.insecure=false"
-      - "--api.dashboard=true"
-      - "--providers.swarm.endpoint=unix:///var/run/docker.sock"
-      - "--providers.swarm.watch=true"
-      - "--providers.swarm.exposedbydefault=false"
-      - "--entryPoints.web.address=:80"
-      - "--entryPoints.websecure.address=:443"
-      - "--entryPoints.websecure.http.tls=true"
-      - "--entryPoints.web.http.redirections.entryPoint.to=websecure"
-      - "--entryPoints.web.http.redirections.entryPoint.scheme=https"
-      - "--certificatesresolvers.le.acme.email=test@gmail.com"
-      - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
-      - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
-    ports:
-      - "80:80"
-      - "443:443"
-      - "8080:8080"
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints:
-          - node.role == manager  # Traefik on manager node
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./letsencrypt:/letsencrypt"
+        - "traefik.http.routers.prisoner-web.rule=Host(`prisoner.alexgravx.com`)"
+        - "traefik.http.routers.prisoner-web.entrypoints=websecure"
+        - "traefik.http.routers.prisoner-web.tls.certresolver=letsencrypt"
+        - "traefik.http.services.prisoner-web.loadbalancer.server.port=3000"
+      networks:
+      - traefik
+
+  api:
+    image: alexgravx/prisonner-api:latest
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.dashboard.rule=Host(`traefik.prisoner.alexgravx.com`)"
-      - "traefik.http.routers.dashboard.entrypoints=websecure"
-      - "traefik.http.routers.dashboard.service=api@internal"
-      - "traefik.http.routers.dashboard.tls=true"
-      - "traefik.http.routers.dashboard.tls.certresolver=le"
+      - "traefik.http.routers.prisoner-api.rule=Host(`prisoner.alexgravx.com`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.prisoner-api.entrypoints=websecure"
+      - "traefik.http.routers.prisoner-api.tls.certresolver=letsencrypt"
+      - "traefik.http.services.prisoner-api.loadbalancer.server.port=8000"
+    networks:
+      - traefik
 
 networks:
-  backend:
-    name: backend
+  traefik:
+    external: true
